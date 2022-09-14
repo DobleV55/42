@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include "ft_isalnum.c"
 #include "ft_isdigit.c"
 #include "ft_isalpha.c"
@@ -18,6 +19,11 @@
 #include "ft_strrchr.c"
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
+
+#include "ft_atoi.c"
+#include "ft_calloc.c"
+#include "ft_strdup.c"
+#include "ft_substr.c"
 
 void test_ft_isalpha() {
     printf("TEST IS_ALPHA ");
@@ -399,6 +405,75 @@ void test_ft_memcmp() {
 	return;
 }
 
+void test_ft_atoi() {
+    printf("TEST ATOI     ");
+    char *str = "   294 2 a76";
+
+    //printf("\n%i\n", atoi(str));
+    //printf("%i", ft_atoi(str));
+
+    if (atoi(str) == ft_atoi(str)) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_calloc() {
+    printf("TEST CALLOC   ");
+    //printf("\n%c\n", (char *)calloc(1, sizeof(char)));
+    //printf("\n%c\n", (char *)ft_calloc(1, sizeof(char)));
+    if (strcmp(calloc(1, sizeof(char)), ft_calloc(1, sizeof(char))) == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_strdup() {
+    printf("TEST STRDUP   ");
+    char * str = "buenas";
+    //printf("\n%s\n", strdup(str));
+    //printf("\n%s\n", ft_strdup(str));
+    if (strcmp(ft_strdup(str), strdup(str)) == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_substr() {
+    printf("TEST SUBSTR   ");
+    char * str = "buenas";
+    //printf("\n%s\n", ft_substr(str, 'e', 6));
+
+    if (strcmp(ft_substr(str, 'e', 6), "enas") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
 int main(void) {
     test_ft_isalpha();
     test_ft_isdigit();
@@ -418,5 +493,10 @@ int main(void) {
 	test_ft_strncmp();
 	test_ft_memchr();// #TODO: Validate NULL
 	test_ft_memcmp();
+    test_ft_atoi();
+    test_ft_calloc();
+    test_ft_strdup();
+    test_ft_substr();
+
     return 0;
 }
