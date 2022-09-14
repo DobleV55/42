@@ -20,11 +20,14 @@
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
 #include "ft_memcmp.c"
+<<<<<<< Updated upstream
 
 #include "ft_atoi.c"
 #include "ft_calloc.c"
 #include "ft_strdup.c"
 #include "ft_substr.c"
+=======
+>>>>>>> Stashed changes
 
 void test_ft_isalpha() {
     printf("TEST IS_ALPHA ");
