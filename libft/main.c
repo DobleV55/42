@@ -19,6 +19,7 @@
 #include "ft_strrchr.c"
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
+#include "ft_memcmp.c"
 
 #include "ft_atoi.c"
 #include "ft_calloc.c"
@@ -391,9 +392,10 @@ void test_ft_memchr() {
 
 void test_ft_memcmp() {
 	printf("TEST MEMCMP   ");
-	char *str_cpy = "a1b2C3D 4z";
+	char *str1 = "a1b2C3D 4z";
+	char *str2 = "a1b2C3D 4a";
 
-	if (strcmp(ft_memchr(str_cpy, 'D', 10), memchr(str_cpy, 'D', 10)) == 0) {
+	if (ft_memcmp(str1, str2, 10) == memcmp(str1, str2, 10)) {
 		printf("\033[0;32m"); //Set the text to the color green
 		printf("PASS\n");
 		printf("\033[0m"); //Resets the text to default color
@@ -473,6 +475,24 @@ void test_ft_substr() {
     }
     return;
 }
+void test_ft_strnstr() {
+	printf("TEST STRNSTR   ");
+	char *str1 = "a1b2C3D 4z";
+	char *str2 = "a1b2C3D 4a";
+
+	if (ft_memcmp(str1, str2, 10) == memcmp(str1, str2, 10)) {
+		printf("\033[0;32m"); //Set the text to the color green
+		printf("PASS\n");
+		printf("\033[0m"); //Resets the text to default color
+	} else {
+		printf("\033[0;31m"); //Set the text to the color red
+		printf("ERROR!\n");
+		printf("\033[0m"); //Resets the text to default color
+	}
+	return;
+}
+
+
 
 int main(void) {
     test_ft_isalpha();
@@ -498,5 +518,6 @@ int main(void) {
     test_ft_strdup();
     test_ft_substr();
 
+	test_ft_strnstr();
     return 0;
 }
