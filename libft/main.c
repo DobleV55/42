@@ -20,14 +20,13 @@
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
 #include "ft_memcmp.c"
-<<<<<<< Updated upstream
 
 #include "ft_atoi.c"
 #include "ft_calloc.c"
 #include "ft_strdup.c"
 #include "ft_substr.c"
-=======
->>>>>>> Stashed changes
+#include "ft_strjoin.c"
+#include "ft_strtrim.c"
 
 void test_ft_isalpha() {
     printf("TEST IS_ALPHA ");
@@ -410,6 +409,23 @@ void test_ft_memcmp() {
 	return;
 }
 
+void test_ft_strnstr() {
+    printf("TEST STRNSTR  ");
+    char *str1 = "a1b2C3D 4z";
+    char *str2 = "a1b2C3D 4a";
+
+    if (ft_memcmp(str1, str2, 10) == memcmp(str1, str2, 10)) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
 void test_ft_atoi() {
     printf("TEST ATOI     ");
     char *str = "   294 2 a76";
@@ -478,35 +494,55 @@ void test_ft_substr() {
     }
     return;
 }
-void test_ft_strnstr() {
-	printf("TEST STRNSTR   ");
-	char *str1 = "a1b2C3D 4z";
-	char *str2 = "a1b2C3D 4a";
 
-	if (ft_memcmp(str1, str2, 10) == memcmp(str1, str2, 10)) {
-		printf("\033[0;32m"); //Set the text to the color green
-		printf("PASS\n");
-		printf("\033[0m"); //Resets the text to default color
-	} else {
-		printf("\033[0;31m"); //Set the text to the color red
-		printf("ERROR!\n");
-		printf("\033[0m"); //Resets the text to default color
-	}
-	return;
+void test_ft_strjoin() {
+    printf("TEST STRJOIN  ");
+    char * str = "buenos ";
+    char * str2 = "dias";
+    //printf("\n%s\n", ft_strjoin(str, str2));
+
+    if (strcmp(ft_strjoin(str, str2), "buenos dias") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_strtrim() {
+    printf("TEST STRTRIM  ");
+    char * str = "eeeholea";
+    char * str2 =  "e";
+    if (strcmp(ft_strtrim(str, str2), "holea") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
 }
 
 
 
+
 int main(void) {
+    // TODO: Falta memmove
     test_ft_isalpha();
     test_ft_isdigit();
     test_ft_isalnum();
     test_ft_isascii();
     test_ft_isprint();
-    test_ft_strlen(); //#TODO: Add more tests
-    test_ft_memset(); //#TODO: Add more tests
-    test_ft_bzero();  //#TODO: Add more tests
-	test_ft_memcpy(); //#TODO: Verificar..
+    test_ft_strlen(); //TODO: Add more tests
+    test_ft_memset(); //TODO: Add more tests
+    test_ft_bzero();  //TODO: Add more tests
+	test_ft_memcpy(); //TODO: Verificar..
 	test_ft_strlcpy();
 	test_ft_strlcat();
 	test_ft_toupper();
@@ -514,13 +550,15 @@ int main(void) {
 	test_ft_strchr();
 	test_ft_strrchr();
 	test_ft_strncmp();
-	test_ft_memchr();// #TODO: Validate NULL
+	test_ft_memchr(); //TODO: Validate NULL
 	test_ft_memcmp();
+    test_ft_strnstr();
     test_ft_atoi();
     test_ft_calloc();
     test_ft_strdup();
     test_ft_substr();
+    test_ft_strjoin();
+    test_ft_strtrim();
 
-	test_ft_strnstr();
     return 0;
 }
