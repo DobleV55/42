@@ -533,7 +533,7 @@ void test_ft_split() {
     printf("TEST SPLIT  ");
     char * str = "sabuenas";
     char * str2 =  'a';
-    printf("%s", ft_split(str, str2));
+    ft_split(str, str2);
     /*
     if (strcmp(ft_strtrim(str, str2), "holea") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
