@@ -20,13 +20,13 @@
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
 #include "ft_memcmp.c"
-
 #include "ft_atoi.c"
 #include "ft_calloc.c"
 #include "ft_strdup.c"
 #include "ft_substr.c"
 #include "ft_strjoin.c"
 #include "ft_strtrim.c"
+#include "ft_split.c"
 
 void test_ft_isalpha() {
     printf("TEST IS_ALPHA ");
@@ -529,6 +529,25 @@ void test_ft_strtrim() {
     return;
 }
 
+void test_ft_split() {
+    printf("TEST SPLIT  ");
+    char * str = "sabuenas";
+    char * str2 =  'a';
+    printf("%s", ft_split(str, str2));
+    /*
+    if (strcmp(ft_strtrim(str, str2), "holea") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+     */
+    return;
+}
+
 
 
 
@@ -559,6 +578,7 @@ int main(void) {
     test_ft_substr();
     test_ft_strjoin();
     test_ft_strtrim();
+    test_ft_split();
 
     return 0;
 }
