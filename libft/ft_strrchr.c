@@ -3,14 +3,14 @@ char	*ft_strrchr(const char *s, int c)
 	char	*str;
 
 	str = (char *)s;
-	while(*str)
+	while (*str)
 	{
 		str++;
 	}
 	str--;
-	while(*str)
+	while (*str)
 	{
-		if(*str == (char)c)
+		if (*str == (char) c)
 		{
 			return (str);
 		}

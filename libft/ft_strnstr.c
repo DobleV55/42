@@ -5,7 +5,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	i;
 
 	i = 0;
-	while(i < n)
+	while (i < n)
 	{
 		if (*s1 > *s2)
 		{
