@@ -22,6 +22,7 @@
 #include "ft_strncmp.c"
 #include "ft_memchr.c"
 #include "ft_memcmp.c"
+#include "ft_strnstr.c"
 #include "ft_atoi.c"
 #include "ft_calloc.c"
 #include "ft_strdup.c"
@@ -419,20 +420,23 @@ void test_ft_memcmp() {
 }
 
 void test_ft_strnstr() {
-    printf("TEST STRNSTR  ");
-    char *str1 = "a1b2C3D 4z";
-    char *str2 = "a1b2C3D 4a";
+	printf("TEST STRNSTR ");
+	char *haystack = "buenaenas";
+	char *needle = "enas";
 
-    if (ft_memcmp(str1, str2, 10) == memcmp(str1, str2, 10)) {
-        printf("\033[0;32m"); //Set the text to the color green
-        printf("PASS\n");
-        printf("\033[0m"); //Resets the text to default color
-    } else {
-        printf("\033[0;31m"); //Set the text to the color red
-        printf("ERROR!\n");
-        printf("\033[0m"); //Resets the text to default color
-    }
-    return;
+	printf("\n%s\n", ft_strnstr(haystack, needle, 6));
+	/*
+	if (str(c, "96231") == 0) {
+		printf("\033[0;32m"); //Set the text to the color green
+		printf("PASS\n");
+		printf("\033[0m"); //Resets the text to default color
+	} else {
+		printf("\033[0;31m"); //Set the text to the color red
+		printf("ERROR!\n");
+		printf("\033[0m"); //Resets the text to default color
+	}
+	*/
+	return;
 }
 
 void test_ft_atoi() {
@@ -729,6 +733,8 @@ void test_ft_putnbr_fd() {
     }
     return;
 }
+
+
 
 int main(void) {
     // TODO: Falta memmove
