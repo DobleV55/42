@@ -531,9 +531,14 @@ void test_ft_strtrim() {
 
 void test_ft_split() {
     printf("TEST SPLIT  ");
-    char * str = "sabuenas";
-    char * str2 =  'a';
-    ft_split(str, str2);
+    char * str = "aaasaaaanbaaaauenasaaaa";
+    int str2 =  'a';
+    char **res = ft_split(str, str2);
+    while (*res)
+    {
+        printf("%s\n", *res);
+        res++;
+    }
     /*
     if (strcmp(ft_strtrim(str, str2), "holea") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
@@ -544,7 +549,7 @@ void test_ft_split() {
         printf("ERROR!\n");
         printf("\033[0m"); //Resets the text to default color
     }
-     */
+    */
     return;
 }
 
