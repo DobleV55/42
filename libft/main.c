@@ -2,6 +2,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <fcntl.h>
+
 #include "ft_isalnum.c"
 #include "ft_isdigit.c"
 #include "ft_isalpha.c"
@@ -27,6 +29,13 @@
 #include "ft_strjoin.c"
 #include "ft_strtrim.c"
 #include "ft_split.c"
+#include "ft_itoa.c"
+#include "ft_strmapi.c"
+#include "ft_striteri.c"
+#include "ft_putchar_fd.c"
+#include "ft_putstr_fd.c"
+#include "ft_putendl_fd.c"
+#include "ft_putnbr_fd.c"
 
 void test_ft_isalpha() {
     printf("TEST IS_ALPHA ");
@@ -553,8 +562,173 @@ void test_ft_split() {
     return;
 }
 
+void test_ft_itoa() {
+    printf("TEST ITOA     ");
+    if (strcmp(ft_itoa(469), "469") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
 
+// Support function to test FT_STRMAPI
+char f(unsigned int i, char c)
+{
+    char str;
+    str = c + 1;
+    return (str);
+}
+void test_ft_strmapi() {
+    printf("TEST STRMAPI  ");
+    char *str = "abc";
+    if (strcmp(ft_strmapi(str, f), "bcd") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
 
+// Support function to test FT_STRITERI
+void f2(unsigned int i, char *c)
+{
+    *c = *c + 1;
+    return;
+}
+void test_ft_striteri() {
+    printf("TEST STRITERI   ");
+    char str[] = "abc";
+    ft_striteri(str, f2);
+    if (strcmp(str, "bcd") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_putchar_fd() {
+    printf("TEST PUTCHAR_FD ");
+    int fd;
+    char c[1];
+
+    /* write */
+
+    fd = open("myfile.txt", O_WRONLY);
+    ft_putchar_fd('v', fd);
+    close(fd);
+
+    /* read */
+
+    fd = open("myfile.txt", O_RDONLY);
+    read(fd, c, 1);
+    if (c[0] == 'v') {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_putstr_fd() {
+    printf("TEST PUTSTR_FD ");
+    int fd;
+    char c[13];
+    char *str = "Hello World!\n";
+    /* write */
+
+    fd = open("a.txt", O_WRONLY);
+    ft_putstr_fd(str, fd);
+    close(fd);
+
+    /* read */
+
+    fd = open("a.txt", O_RDONLY);
+    read(fd, c, 13);
+    if (strcmp(c, str) == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
+
+void test_ft_putendl_fd() {
+    printf("TEST PUTENDL");
+    int fd;
+    char c[12];
+    char *str = "Hello World!";
+    /* write */
+
+    fd = open("b.txt", O_WRONLY);
+    ft_putendl_fd(str, fd);
+    close(fd);
+
+    /* read */
+
+    fd = open("b.txt", O_RDONLY);
+    read(fd, c, 12);
+    if (strcmp(c, str) == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+    return;
+}
+
+void test_ft_putnbr_fd() {
+    printf("TEST PUTNBR ");
+    int fd;
+    int n = 96231;
+    char c[5];
+    /* write */
+
+    fd = open("c.txt", O_WRONLY);
+    ft_putnbr_fd(n, fd);
+    close(fd);
+
+    /* read */
+
+    fd = open("c.txt", O_RDONLY);
+    read(fd, c, 5);
+    //printf("%s", c);
+    if (strcmp(c, "96231") == 0) {
+        printf("\033[0;32m"); //Set the text to the color green
+        printf("PASS\n");
+        printf("\033[0m"); //Resets the text to default color
+    } else {
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("ERROR!\n");
+        printf("\033[0m"); //Resets the text to default color
+    }
+    return;
+}
 
 int main(void) {
     // TODO: Falta memmove
@@ -584,6 +758,13 @@ int main(void) {
     test_ft_strjoin();
     test_ft_strtrim();
     test_ft_split();
+    test_ft_itoa();
+    test_ft_strmapi();
+    test_ft_striteri();
+    test_ft_putchar_fd();
+    test_ft_putstr_fd(); //TODO: con "Hello World\n" no pasa el test.
+    test_ft_putendl_fd();
+    test_ft_putnbr_fd();
 
     return 0;
 }
