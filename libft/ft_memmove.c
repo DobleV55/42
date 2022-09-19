@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvila <vvila@student.42madrid.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+#include <string.h>
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (s != NULL && fd != -1)
+	size_t	counter;
+	char	*dest;
+	char	*source;
+
+	dest = (char *) dst;
+	source = (char *) src;
+	counter = 0;
+	while (counter < len)
 	{
-		write(fd, s, ft_strlen(s));
-		write(fd, "\n", 1);
+		*dest = *source;
+		dest++;
+		source++;
+		counter++;
 	}
+	*dest = '\0';
+	return (dst);
 }

@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int		i;
-	char	*r;
-	int		r_size;
+	size_t		i;
+	size_t		r_size;
+	char		*r;
 
 	i = 0;
-	while (s[i] != start && i < len && s[i])
+	while ((s[i] != (char)start) && (i < len && s[i]))
 		i++;
-	r = malloc (len - i);
+	r = (char *) malloc (len - i);
 	r_size = len - i;
 	while (i < len)
 	{
