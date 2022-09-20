@@ -12,18 +12,15 @@
 
 #include <string.h>
 
-void	*ft_bzero(void *s, size_t len)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	counter;
 	char	*str;
 
 	str = s;
-	counter = 0;
-	while (counter < len)
+	while (n > 0)
 	{
-		str[counter] = '\0';
+		*str = 0;
 		str++;
-		counter++;
+		n--;
 	}
-	return (0);
 }

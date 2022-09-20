@@ -23,7 +23,9 @@ char	*ft_strdup(const char *s1)
 		s1++;
 		len++;
 	}
-	str_cpy = (char *) malloc (len);
+	str_cpy = (char *) malloc (len+1);
+	if (!str_cpy)
+		return (0);
 	s1 = s1 - len;
 	while (*s1)
 	{
@@ -31,5 +33,6 @@ char	*ft_strdup(const char *s1)
 		str_cpy++;
 		s1++;
 	}
+	*str_cpy = '\0';
 	return (str_cpy - len);
 }

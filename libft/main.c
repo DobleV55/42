@@ -421,10 +421,14 @@ void test_ft_memcmp() {
 
 void test_ft_strnstr() {
 	printf("TEST STRNSTR ");
-	char *haystack = "buenaenas";
-	char *needle = "enas";
+	char *s1 = "see FF your FF return FF now FF";
+	char *s2 = "F";
 
-	printf("\n%s\n", ft_strnstr(haystack, needle, 6));
+	size_t	max = strlen(s1);
+	char	*i1 = strnstr(s1, s2, max);
+	char	*i2 = ft_strnstr(s1, s2, max);
+	printf("\n%s\n", i1);
+	printf("\n%s\n", i2);
 	/*
 	if (str(c, "96231") == 0) {
 		printf("\033[0;32m"); //Set the text to the color green
@@ -441,10 +445,10 @@ void test_ft_strnstr() {
 
 void test_ft_atoi() {
     printf("TEST ATOI     ");
-    char *str = "   294 2 a76";
+    char *str = "2147483649";;
 
-    //printf("\n%i\n", atoi(str));
-    //printf("%i", ft_atoi(str));
+    printf("\nfake: %i\n", ft_atoi(str));
+    printf("\nreal: %i\n", atoi(str));
 
     if (atoi(str) == ft_atoi(str)) {
         printf("\033[0;32m"); //Set the text to the color green

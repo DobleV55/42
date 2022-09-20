@@ -25,7 +25,8 @@ char	*ft_itoa(int n)
 		n = n / 10;
 		len_n++;
 	}
-	res = (char *) malloc (len_n);
+	res = (char *) malloc (len_n+1);
+	res[len_n+1] = '\0';
 	len_n--;
 	while (len_n >= 0)
 	{

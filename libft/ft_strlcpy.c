@@ -10,22 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize)
 {
-	size_t	counter;
 	size_t	len_src;
 
-	counter = 0;
-	len_src = 0;
-	while (counter < dstsize - 1)
+	len_src = ft_strlen(src);
+	while (dstsize > 1 && *src)
 	{
 		*dst = *src;
 		dst++;
 		src++;
-		counter++;
+		dstsize--;
 	}
-	*dst = '\0';
+	if (dstsize > 0)
+		*dst = '\0';
 	return (len_src);
 }

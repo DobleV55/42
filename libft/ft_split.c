@@ -36,20 +36,29 @@ int	arrays_needed(char const *s, char c)
 
 void	array_length(char const *s, char c, char **res, int arrays_need)
 {
-	int	array_len;
-	int	counter;
+	int		array_len;
+	int		counter;
+	char 	*malloc_validator;
 
 	counter = 0;
 	array_len = 0;
 	while (counter < arrays_need)
 	{
 		if (*s == '\0' && array_len)
-			res[counter++] = (char *) malloc (array_len);
+		{
+			malloc_validator = (char *) malloc (array_len);
+			if (!malloc_validator)
+				return ;
+			res[counter++] = malloc_validator;
+		}
 		else if (*s != c)
 			array_len++;
 		else if (*s == c && array_len)
 		{
-			res[counter] = (char *) malloc (array_len);
+			malloc_validator = (char *) malloc (array_len);
+			if (!malloc_validator)
+				return ;
+			res[counter] = malloc_validator;
 			array_len = 0;
 			counter++;
 		}
@@ -93,6 +102,8 @@ char	**ft_split(char const *s, char c)
 
 	arrays_need = arrays_needed (s, c);
 	r = (char **) malloc ((arrays_need + 1) * sizeof(char *));
+	if (!r)
+		return (0);
 	array_length (s, c, r, arrays_need);
 	place_elements_into_arr (s, c, r);
 	return (r);

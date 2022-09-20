@@ -9,30 +9,33 @@
 /*   Updated: 2022/09/19 00:06:34 by vvila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int		sign;
-	int		n;
-	int		i;
+	int				sign;
+	unsigned int	n;
 
-	i = 0;
 	sign = 1;
 	n = 0;
-	while (str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (*str == ' ' || *str == 9 || *str == 10|| *str == 11 ||
+			*str == 12 || *str == 13)
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (str[i++] != '-' && str[i++] != '+')
-		{
-			if (*str == '-')
-				sign = -1;
-		}
+		if (*str++ == '-')
+			sign = -1;
+		if (*str == '-' || *str == '+')
+			return (n);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		n = n * 10 + (str[i] - 48);
-		i++;
+		n = n * 10 + (*str - 48);
+		str++;
 	}
+	if (n > 2147483648 && sign == -1)
+		return (0);
+	else if (n > 2147483648 && sign == 1)
+		return (-1);
 	return (n * sign);
 }

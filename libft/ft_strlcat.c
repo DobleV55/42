@@ -9,26 +9,29 @@
 /*   Updated: 2022/09/19 00:06:35 by vvila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <string.h>
+#include "libft.h"
 
 size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	size_t	len_dst;
+	size_t	len_total;
+	size_t	len_src;
 
-	len_dst = 0;
-	while (*dst)
+	len_total = ft_strlen(src) + ft_strlen(dst);
+	len_src = ft_strlen(src);
+	if (dstsize <= ft_strlen(dst))
+		return (len_src + dstsize);
+	while (*dst != 0)
 	{
 		dst++;
-		len_dst++;
+		dstsize--;
 	}
-	while (len_dst < dstsize - 1)
+	while (*src != 0 && dstsize > 1)
 	{
 		*dst = *src;
-		dst++;
 		src++;
-		len_dst++;
+		dst++;
+		dstsize--;
 	}
-	*dst = '\0';
-	return (len_dst);
+	*(dst++) = 0;
+	return (len_total);
 }
