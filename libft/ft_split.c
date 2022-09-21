@@ -100,6 +100,8 @@ char	**ft_split(char const *s, char c)
 	char	**r;
 	int		arrays_need;
 
+	if (!s)
+		return (NULL);
 	arrays_need = arrays_needed (s, c);
 	r = (char **) malloc ((arrays_need + 1) * sizeof(char *));
 	if (!r)

@@ -17,12 +17,17 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		count;
 	char	*res;
 
-	res = (char *) malloc (ft_strlen(s));
+	if (!s)
+		return (NULL);
+	res = (char *) malloc (ft_strlen(s) + 1);
+	if (res == NULL)
+		return (NULL);
 	count = 0;
 	while (s[count])
 	{
 		res[count] = f(count, s[count]);
 		count++;
 	}
+	res[count] = '\0';
 	return (res);
 }

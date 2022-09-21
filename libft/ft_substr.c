@@ -21,7 +21,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	while ((s[i] != (char)start) && (i < len && s[i]))
 		i++;
-	r = (char *) malloc (len - i);
+	//printf("%s", &s[i]);
+	r = (char *) malloc (i);
 	r_size = len - i;
 	while (i < len)
 	{
@@ -29,5 +30,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 		r++;
 	}
+	//printf("%s", r - r_size);
 	return (r - r_size);
 }
