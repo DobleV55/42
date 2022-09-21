@@ -497,9 +497,10 @@ void test_ft_strdup() {
 
 void test_ft_substr() {
     printf("TEST SUBSTR   ");
-    char * str = "buenas";
-    //printf("\n%s\n", ft_substr(str, 'e', 6));
-
+    //char * str = "buenas";
+	char	*str = "i just want this part #############";
+    printf("\n%s\n", ft_substr(str, 0, 22));
+	/*
     if (strcmp(ft_substr(str, 'e', 6), "enas") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
         printf("PASS\n");
@@ -509,14 +510,17 @@ void test_ft_substr() {
         printf("ERROR!\n");
         printf("\033[0m"); //Resets the text to default color
     }
+    */
     return;
 }
 
 void test_ft_strjoin() {
     printf("TEST STRJOIN  ");
-    char * str = "buenos ";
+    char * str = "buenos";
+    char * str1 = " ";
     char * str2 = "dias";
-    //printf("\n%s\n", ft_strjoin(str, str2));
+    char * temp = ft_strjoin(str, str1);
+	printf("%s", ft_strjoin(temp, str2));
 
     if (strcmp(ft_strjoin(str, str2), "buenos dias") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
@@ -571,7 +575,11 @@ void test_ft_split() {
 }
 
 void test_ft_itoa() {
-    printf("TEST ITOA     ");
+    printf("TEST ITOA     \n");
+	printf("\n%s\n", ft_itoa(-345));
+	printf("\n%s\n", ft_itoa(156));
+	printf("\n%s\n", ft_itoa(-0));
+	/*
     if (strcmp(ft_itoa(469), "469") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
         printf("PASS\n");
@@ -581,6 +589,7 @@ void test_ft_itoa() {
         printf("ERROR!\n");
         printf("\033[0m"); //Resets the text to default color
     }
+    */
     return;
 }
 
@@ -760,21 +769,21 @@ int main(void) {
 	test_ft_strncmp();
 	test_ft_memchr(); //TODO: Validate NULL
 	test_ft_memcmp();
-    test_ft_strnstr();
-    test_ft_atoi();
+    //test_ft_strnstr();
+    //test_ft_atoi();
     test_ft_calloc();
     test_ft_strdup();
     test_ft_substr();
     test_ft_strjoin();
     test_ft_strtrim();
-    test_ft_split();
-    test_ft_itoa();
+    //test_ft_split();
+    //test_ft_itoa();
     test_ft_strmapi();
     test_ft_striteri();
     test_ft_putchar_fd();
     test_ft_putstr_fd(); //TODO: con "Hello World\n" no pasa el test.
     test_ft_putendl_fd();
-    test_ft_putnbr_fd();
+    //test_ft_putnbr_fd();
 
     return 0;
 }
