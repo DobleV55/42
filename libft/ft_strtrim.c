@@ -13,7 +13,7 @@
 
 int	char_in_set(char const *c, char const *set)
 {
-	while(*set)
+	while (*set)
 	{
 		if (*set == *c)
 			return (1);
@@ -22,7 +22,7 @@ int	char_in_set(char const *c, char const *set)
 	return (0);
 }
 
-char *normi_right_pointer(char const *s1, char const *set)
+char	*normi_right_pointer(char const *s1, char const *set)
 {
 	char	*right_index;
 
@@ -31,7 +31,8 @@ char *normi_right_pointer(char const *s1, char const *set)
 		right_index--;
 	return (right_index);
 }
-char *normi_left_pointer(char const *s1, char const *set)
+
+char	*normi_left_pointer(char const *s1, char const *set)
 {
 	char	*left_index;
 

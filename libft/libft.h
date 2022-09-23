@@ -5,6 +5,15 @@
 #include <stdlib.h> // because of malloc
 #include <unistd.h> // because of write
 
+
+struct NormiSplit {
+	int		array_len;
+	int		counter;
+	int 	arrays_need;
+	char	*malloc_validator;
+} normi_split_struct;
+
+
 int				ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
