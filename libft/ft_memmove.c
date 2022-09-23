@@ -12,23 +12,8 @@
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	normi_memmove(void *dest, void *dst, const void *src, const void *source)
 {
-	const void	*source;
-	void		*dest;
-	void 		*dst_cpy;
-
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	source = src;
-	dest = dst;
-	dst_cpy = dst;
-	while (len > 0)
-	{
-		source++;
-		dest++;
-		len--;
-	}
 	while (src != source)
 	{
 		if (src < dst)
@@ -44,5 +29,25 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			src++;
 		}
 	}
+	return ;
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	const void	*source;
+	void		*dest;
+	void 		*dst_cpy;
+
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	source = src;
+	dest = dst;
+	dst_cpy = dst;
+	while (len-- > 0)
+	{
+		source++;
+		dest++;
+	}
+	normi_memmove(dest, dst, src, source);
 	return (dst_cpy);
 }
