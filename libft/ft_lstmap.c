@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvila <vvila@student.42madrid.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:06:34 by vvila             #+#    #+#             */
-/*   Updated: 2022/09/19 00:06:34 by vvila            ###   ########.fr       */
+/*   Created: 2022/09/19 00:06:35 by vvila             #+#    #+#             */
+/*   Updated: 2022/09/19 00:06:35 by vvila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	norm_putchar(char c, int fd)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (fd != -1)
-		write (fd, &c, 1);
-}
+	t_list	*res;
+	t_list	*new;
+	t_list	*value;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	long	num;
-
-	num = n;
-	if (num < 0)
+	if (!lst)
+		return (NULL);
+	res = NULL;
+	while (lst)
 	{
-		norm_putchar('-', fd);
-		num = num * -1;
+		value = (*f)(lst -> content);
+		new = ft_lstnew (value);
+		if (!new)
+		{
+			ft_lstclear(&value, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&res, new);
+		lst = lst->next;
 	}
-	if (num >= 10)
-	{
-		ft_putnbr_fd(num / 10, fd);
-		ft_putnbr_fd(num % 10, fd);
-	}
-	else
-		norm_putchar(num + '0', fd);
+	return (res);
 }

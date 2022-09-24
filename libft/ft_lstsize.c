@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvila <vvila@student.42madrid.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:06:34 by vvila             #+#    #+#             */
-/*   Updated: 2022/09/19 00:06:34 by vvila            ###   ########.fr       */
+/*   Created: 2022/09/19 00:06:35 by vvila             #+#    #+#             */
+/*   Updated: 2022/09/19 00:06:35 by vvila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	norm_putchar(char c, int fd)
+int	ft_lstsize(t_list *lst)
 {
-	if (fd != -1)
-		write (fd, &c, 1);
-}
+	int		len;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	long	num;
-
-	num = n;
-	if (num < 0)
+	len = 0;
+	if (!lst)
 	{
-		norm_putchar('-', fd);
-		num = num * -1;
+		return (len);
 	}
-	if (num >= 10)
+	while (lst->next != NULL)
 	{
-		ft_putnbr_fd(num / 10, fd);
-		ft_putnbr_fd(num % 10, fd);
+		lst = lst->next;
+		len++;
 	}
-	else
-		norm_putchar(num + '0', fd);
+	return (len + 1);
 }

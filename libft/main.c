@@ -722,8 +722,8 @@ void test_ft_putendl_fd() {
 void test_ft_putnbr_fd() {
     printf("TEST PUTNBR ");
     int fd;
-    int n = 96231;
-    char c[5];
+    int n = -2147483648LL;
+    char c[10];
     /* write */
 
     fd = open("c.txt", O_WRONLY);
@@ -734,6 +734,7 @@ void test_ft_putnbr_fd() {
 
     fd = open("c.txt", O_RDONLY);
     read(fd, c, 5);
+	//printf("%s", c);
     //printf("%s", c);
     if (strcmp(c, "96231") == 0) {
         printf("\033[0;32m"); //Set the text to the color green
@@ -783,7 +784,7 @@ int main(void) {
     test_ft_putchar_fd();
     test_ft_putstr_fd(); //TODO: con "Hello World\n" no pasa el test.
     test_ft_putendl_fd();
-    //test_ft_putnbr_fd();
+    test_ft_putnbr_fd();
 
     return 0;
 }
