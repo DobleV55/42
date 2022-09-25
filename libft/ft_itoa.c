@@ -34,10 +34,13 @@ char	*ft_itoa(int n)
 
 	len_n = int_len(n);
 	res = (char *) malloc (len_n);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	if (!res)
 		return (NULL);
+	if (n == -2147483648)
+	{
+		free(res);
+		return (ft_strdup("-2147483648"));
+	}
 	if (n < 0)
 	{
 		n = n * -1;
