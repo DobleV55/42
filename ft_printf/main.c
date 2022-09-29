@@ -6,7 +6,7 @@ int main()
 	char	*s;
 
 	s = "hola";
-	ft_printf("pointer: %p\ncharacter: %c\ninteger: %i\nstring: %s\nunsigned int: %u\n", s, 'h', 23, "amado", 4294967295);
-	//printf("\nunsigned int: %u\n", 4294967295);
+	ft_printf("pointer: %s\ninteger: %i\nstring: %s\nchar: %c\nunsigned int: %u\nhexadecimal int (lower): %x\nhexadecimal int (upper): %X\nporcetage: %%\n", s, 123, s, 'c', 429496729, -1, -1);
+	printf("\nnumber: %X\n", -1);
 	return (0);
 }
