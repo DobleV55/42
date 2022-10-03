@@ -54,7 +54,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	left_index = normi_left_pointer(s1, set);
 	right_index = normi_right_pointer(s1, set);
 	len_r = right_index - left_index + 1;
-	if (right_index - left_index <= 0 || !*s1)
+	if (right_index - left_index < 0 || !*s1)
 		return (ft_calloc(1, 1));
 	r = (char *) malloc (right_index - left_index + 2);
 	if (!r)
