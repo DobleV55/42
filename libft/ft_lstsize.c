@@ -18,12 +18,12 @@ int	ft_lstsize(t_list *lst)
 	len = 0;
 	if (!lst)
 	{
-		return (len);
+		return (0);
 	}
-	while (lst->next != NULL)
+	while (lst != NULL)
 	{
 		lst = lst->next;
 		len++;
 	}
-	return (len + 1);
+	return (len);
 }
