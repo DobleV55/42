@@ -13,10 +13,10 @@ struct NormiSplit {
 	char	*malloc_validator;
 } normi_split_struct;
 
-typedef struct s_list
+typedef struct t_list
 {
 	void			*content;
-	struct s_list	*next;
+	struct t_list	*next;
 } t_list;
 
 int				ft_atoi(const char *str);
