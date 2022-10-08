@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	norm_putchar(char c, int fd)
+static	void	norm_putchar(char c, int fd)
 {
 	if (fd != -1)
 		write (fd, &c, 1);

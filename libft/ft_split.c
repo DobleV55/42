@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-
-static void	clean_all(struct NormiSplit *norm, char **r)
+static void	clean_all(struct s_norm *norm, char **r)
 {
 	free(norm -> malloc_validator);
 	while (*r)
@@ -24,7 +23,6 @@ static void	clean_all(struct NormiSplit *norm, char **r)
 	free(norm);
 	exit(1);
 }
-
 
 static int	arrays_needed(char const *s, char c)
 {
@@ -47,7 +45,7 @@ static int	arrays_needed(char const *s, char c)
 	return (arrays + 1);
 }
 
-static void	array_length(char const *s, char c, char **res, struct NormiSplit *norm)
+static void	array_length(char const *s, char c, char **res, struct s_norm *norm)
 {
 	while (norm -> counter != norm -> arrays_need - 1)
 	{
@@ -55,7 +53,7 @@ static void	array_length(char const *s, char c, char **res, struct NormiSplit *n
 		{
 			norm -> malloc_validator = (char *) malloc (norm -> array_len + 1);
 			if (!norm -> malloc_validator)
-				return clean_all(norm, res);
+				return (clean_all(norm, res));
 			res[norm -> counter++] = norm -> malloc_validator;
 			norm -> array_len = 0;
 		}
@@ -63,9 +61,9 @@ static void	array_length(char const *s, char c, char **res, struct NormiSplit *n
 			norm -> array_len++;
 		else if (*s == c && norm -> array_len)
 		{
-			norm -> malloc_validator = (char *) malloc (norm -> array_len + 1); //TODO: Verificar que malloc (array_len) == mallox(sizeof(char *) * array_len)
+			norm -> malloc_validator = (char *) malloc (norm -> array_len + 1);
 			if (!norm -> malloc_validator)
-				return clean_all(norm, res);
+				return (clean_all(norm, res));
 			res[norm -> counter++] = norm -> malloc_validator;
 			norm -> array_len = 0;
 		}
@@ -75,32 +73,27 @@ static void	array_length(char const *s, char c, char **res, struct NormiSplit *n
 	return ;
 }
 
-static void	place_elements_into_arr(char const *s, char c, char **res, struct NormiSplit *norm)
+static void	place_chars(char const *s, char c, char **res, struct s_norm *norm)
 {
-	int	j;
-	int	len;
-
-	j = 0;
-	len = 0;
 	norm -> counter = 0;
 	while (norm -> counter != norm -> arrays_need - 1)
 	{
 		if (*s != c && *s != '\0')
 		{
-			res[norm -> counter][j++] = *s;
-			len = 1;
+			res[norm -> counter][norm -> j++] = *s;
+			norm -> len = 1;
 		}
-		else if (*s == c && len)
+		else if (*s == c && norm -> len)
 		{
-			res[norm -> counter][j] = '\0';
+			res[norm -> counter][norm -> j] = '\0';
 			norm -> counter++;
-			j = 0;
-			len = 0;
+			norm -> j = 0;
+			norm -> len = 0;
 		}
 		else if (*s == '\0')
 		{
-			res[norm -> counter][j] = '\0';
-			return;
+			res[norm -> counter][norm -> j] = '\0';
+			return ;
 		}
 		s++;
 	}
@@ -109,16 +102,18 @@ static void	place_elements_into_arr(char const *s, char c, char **res, struct No
 
 char	**ft_split(char const *s, char c)
 {
-	char				**r;
-	struct NormiSplit	*norm;
+	char			**r;
+	struct s_norm	*norm;
 
 	if (!s)
 		return (NULL);
-	norm = malloc(sizeof (struct NormiSplit));
+	norm = malloc(sizeof (struct s_norm));
 	if (!norm)
 		return (NULL);
 	norm -> counter = 0;
 	norm -> array_len = 0;
+	norm -> j = 0;
+	norm -> len = 0;
 	norm -> arrays_need = arrays_needed (s, c);
 	r = (char **) malloc ((norm->arrays_need) * sizeof(char *));
 	if (!r)
@@ -127,7 +122,7 @@ char	**ft_split(char const *s, char c)
 		return (r);
 	}
 	array_length (s, c, r, norm);
-	place_elements_into_arr (s, c, r, norm);
+	place_chars(s, c, r, norm);
 	free(norm);
 	return (r);
 }

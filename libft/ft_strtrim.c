@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-int	char_in_set(char const *c, char const *set)
+static	int	char_in_set(char const *c, char const *set)
 {
 	while (*set)
 	{
@@ -22,7 +22,7 @@ int	char_in_set(char const *c, char const *set)
 	return (0);
 }
 
-char	*normi_right_pointer(char const *s1, char const *set)
+static	char	*normi_right_pointer(char const *s1, char const *set)
 {
 	char	*right_index;
 
@@ -32,7 +32,7 @@ char	*normi_right_pointer(char const *s1, char const *set)
 	return (right_index);
 }
 
-char	*normi_left_pointer(char const *s1, char const *set)
+static	char	*normi_left_pointer(char const *s1, char const *set)
 {
 	char	*left_index;
 

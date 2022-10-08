@@ -14,24 +14,29 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t		len_s;
 	char		*r;
+	char		*r_cpy;
 
-	if (!s)
-		return (NULL);
-	len_s = ft_strlen(s);
-	if (start > len_s)
+	if (start >= ft_strlen(s) || start == 4294967295)
 	{
-		r = (char *) malloc(1);
-		*r = '\0';
+		r = (char *) ft_calloc (1, 1);
+		if (!r)
+			return (NULL);
 		return (r);
 	}
-	if (len_s - start < len)
-		len = len_s - start;
-	r = (char *) malloc (len + 1);
+	if (len > ft_strlen(s))
+		r = (char *) malloc ((ft_strlen(s) - start) + 1);
+	else
+		r = (char *) malloc (len + 1);
 	if (!r)
 		return (NULL);
-	if (len_s > start)
-		ft_strlcpy(r, (s + start), (len + 1));
-	return (r);
+	r_cpy = r;
+	s = s + start;
+	while (*s && len)
+	{
+		*r++ = *s++;
+		len--;
+	}
+	*r = '\0';
+	return (r_cpy);
 }

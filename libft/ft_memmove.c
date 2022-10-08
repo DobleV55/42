@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	norm_memmove(void *dest, void *dst, const void *src, const void *source)
+static	void	norm(void *dest, void *dst, const void *src, const void *source)
 {
 	while (src != source)
 	{
@@ -48,6 +48,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		source++;
 		dest++;
 	}
-	norm_memmove(dest, dst, src, source);
+	norm(dest, dst, src, source);
 	return (dst_cpy);
 }
