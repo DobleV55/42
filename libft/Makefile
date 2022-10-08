@@ -27,4 +27,4 @@ bonus: $(OBJS) $(BONUSOBJS)
 	gcc -c $(CFLAGS) $(SRC)
 	ar rcs $(NAME) $(OBJS) $(BONUSOBJS)
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
