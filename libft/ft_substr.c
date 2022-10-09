@@ -17,12 +17,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char		*r;
 	char		*r_cpy;
 
+	if (!s)
+		return (NULL);
 	if (start >= ft_strlen(s) || start == 4294967295)
 	{
-		r = (char *) ft_calloc (1, 1);
-		if (!r)
-			return (NULL);
-		return (r);
+		return ((char *) ft_calloc (1, 1));
 	}
 	if (len > ft_strlen(s))
 		r = (char *) malloc ((ft_strlen(s) - start) + 1);

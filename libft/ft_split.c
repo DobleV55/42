@@ -21,7 +21,6 @@ static void	clean_all(struct s_norm *norm, char **r)
 	}
 	free(r);
 	free(norm);
-	exit(1);
 }
 
 static int	arrays_needed(char const *s, char c)
