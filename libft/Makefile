@@ -20,8 +20,8 @@ $(NAME): $(OBJS)
 all: $(NAME)
 clean:
 	rm -f $(OBJS)
-fclean: clean
-	rm -f $(NAME)
+fclean: clean clbonus
+	rm -f $(NAME) 
 re: fclean all
 clbonus:
 	$(RM) $(OBJS) $(BONUSOBJS)
