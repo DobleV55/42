@@ -98,24 +98,32 @@ int	ft_putaddress(unsigned long num)
 	return (1);
 }
 
-int	ft_format(va_list ap, const char str)
+static int	ft_format(va_list *ap, const char str)
 {
 	int	prints;
 
 	prints = 0;
-	if (str == 'i' || str == 'd')
-		prints += ft_putnbr(va_arg(ap, int));
+	if (str == 'c')
+	{
+		prints += ft_putchar(va_arg(*ap, int));
+	}
+	else if (str == 's')
+	{
+		prints += ft_putstr(va_arg(*ap, char*));
+	}
+	else if (str == 'i' || str == 'd')
+		prints += ft_putnbr(va_arg(*ap, int));
 	else if (str == 'p')
 	{
 		norm_putchar('0');
 		norm_putchar('x');
 		prints += 2;
-		prints += ft_putaddress(va_arg(ap, unsigned long long));
+		prints += ft_putaddress(va_arg(*ap, unsigned long long));
 	}
 	else if (str == 'u')
-		prints += ft_putnbr(va_arg(ap, unsigned int));
+		prints += ft_putnbr(va_arg(*ap, unsigned int));
 	else if (str == 'x' || str == 'X')
-		prints += ft_puthexnbr(va_arg(ap, int), str);
+		prints += ft_puthexnbr(va_arg(*ap, int), str);
 	return (prints);
 }
 
@@ -130,19 +138,9 @@ int ft_printf(const char *str, ...)
 	va_start(ap, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i+1] == 'c')
+		if (str[i] == '%')
 		{
-			prints += ft_putchar(va_arg(ap, int));
-			i++;
-		}
-		else if (str[i] == '%' && str[i+1] == 's')
-		{
-			prints += ft_putstr(va_arg(ap, char*));
-			i++;
-		}
-		else if (str[i] == '%')
-		{
-			prints += ft_format(ap, str[i+1]);
+			prints += ft_format(&ap, str[i+1]);
 			i++;
 		}
 		else
