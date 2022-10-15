@@ -5,6 +5,12 @@ void	norm_putchar(char c)
 	write (1, &c, 1);
 }
 
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
 int	ft_putuint(unsigned int num)
 {
 	if (!num)
@@ -21,21 +27,38 @@ int	ft_putuint(unsigned int num)
 
 int	ft_putnbr(int num)
 {
-	if (!num)
-		return (1);
+	static int	num_len;
+
+	if (num == -2147483648)
+		return write(1, "-2147483648", 11);
 	if (num < 0)
 	{
-		norm_putchar('-');
+		num_len = 0;
+		num_len += ft_putchar('-');
 		num = num * -1;
 	}
 	if (num >= 10)
 	{
 		ft_putnbr(num / 10);
-		ft_putnbr(num % 10);
+		num = num % 10;
 	}
-	else
-		norm_putchar(num + '0');
-	return (1);
+	num_len += ft_putchar(num + '0');
+	return (num_len);
+}
+
+int	ft_putunbr(unsigned int num)
+{
+	static int	num_len;
+
+	if (num == 2147483648)
+		return write(1, "2147483648", 10);
+	if (num >= 10)
+	{
+		num_len += ft_putnbr(num / 10);
+		num = num % 10;
+	}
+	num_len += ft_putchar(num + '0');
+	return (num_len);
 }
 
 int	ft_putstr(char *s)
@@ -56,46 +79,40 @@ int	ft_putstr(char *s)
 	return (len);
 }
 
-int	ft_putchar(char c)
+int	ft_puthexnbr(unsigned int num, char format)
 {
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_puthexnbr(int num, char format)
-{
-
-	char	*hexchar_lower;
-	char	*hexchar_upper;
+	static int	num_len;
+	char		*hexchar_lower;
+	char		*hexchar_upper;
 
 	hexchar_lower = "0123456789abcdef";
 	hexchar_upper = "0123456789ABCDEF";
 	if (num >= 16)
 	{
 		ft_puthexnbr(num / 16, format);
-		ft_puthexnbr(num % 16, format);
+		num = num % 16;
 	}
-	else if (format == 'x')
-		norm_putchar(hexchar_lower[num % 16]);
+	if (format == 'x')
+		num_len += ft_putchar(hexchar_lower[num % 16]);
 	else
-		norm_putchar(hexchar_upper[num % 16]);
-	return (1);
+		num_len += ft_putchar(hexchar_upper[num % 16]);
+	return (num_len);
 }
 
 int	ft_putaddress(unsigned long num)
 {
+	static int 	num_len;
+	char		*hexchar;
 
-	char	*hexchar;
-
+	num_len = 0;
 	hexchar = "0123456789abcdef";
 	if (num >= 16)
 	{
 		ft_putaddress(num / 16);
-		ft_putaddress(num % 16);
+		num = num % 16;
 	}
-	else
-		norm_putchar(hexchar[num % 16]);
-	return (1);
+	num_len += ft_putchar(hexchar[num % 16]);
+	return (num_len);
 }
 
 static int	ft_format(va_list *ap, const char str)
@@ -115,15 +132,16 @@ static int	ft_format(va_list *ap, const char str)
 		prints += ft_putnbr(va_arg(*ap, int));
 	else if (str == 'p')
 	{
-		norm_putchar('0');
-		norm_putchar('x');
+		write(1, "0x", 2);
 		prints += 2;
 		prints += ft_putaddress(va_arg(*ap, unsigned long long));
 	}
 	else if (str == 'u')
-		prints += ft_putnbr(va_arg(*ap, unsigned int));
+		prints += ft_putunbr(va_arg(*ap, unsigned int));
 	else if (str == 'x' || str == 'X')
 		prints += ft_puthexnbr(va_arg(*ap, int), str);
+	else if (str == '%')
+		prints += ft_putchar('%');
 	return (prints);
 }
 
