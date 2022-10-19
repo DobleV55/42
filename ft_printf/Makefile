@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = gcc
-SRC = ft_printf.c
+SRC = ft_printf.c extra.c extra2.c extra3.c
 
 OBJS=$(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
