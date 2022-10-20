@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extra2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 size_t	ft_strlen(const char *s)
@@ -25,6 +37,7 @@ static	void	ft_bzero(void *s, size_t n)
 		n--;
 	}
 }
+
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*r;

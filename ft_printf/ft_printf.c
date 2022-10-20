@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:58:46 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:15 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putnbr(int num)
@@ -26,7 +38,7 @@ static int	ft_format(va_list *ap, const char str)
 	if (str == 'c')
 		prints += ft_putchar(va_arg(*ap, int));
 	else if (str == 's')
-		prints += ft_putstr(va_arg(*ap, char*), 1);
+		prints += ft_putstr(va_arg(*ap, *char), 1);
 	else if (str == 'i' || str == 'd')
 		prints += ft_putnbr(va_arg(*ap, int));
 	else if (str == 'p')
@@ -45,11 +57,11 @@ static int	ft_format(va_list *ap, const char str)
 	return (prints);
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-	int	i;
-	int	prints;
-	va_list ap;
+	int		i;
+	int		prints;
+	va_list	ap;
 
 	i = 0;
 	prints = 0;
@@ -58,7 +70,7 @@ int ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			prints += ft_format(&ap, str[i+1]);
+			prints += ft_format(&ap, str[i + 1]);
 			i++;
 		}
 		else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extra3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static	char	*ft_strdup(const char *s1)
@@ -81,10 +93,11 @@ char	*ft_itoa(int n)
 	}
 	return (res);
 }
+
 char	*ft_uitoa(unsigned int n)
 {
-	char	*res;
 	unsigned int		len_n;
+	char				*res;
 
 	if (n == 2147483648)
 		return (ft_strdup("2147483648"));
@@ -92,11 +105,6 @@ char	*ft_uitoa(unsigned int n)
 	res = (char *) malloc (len_n + 1);
 	if (!res)
 		return (NULL);
-	if (n < 0)
-	{
-		n = n * -1;
-		res[0] = '-';
-	}
 	res[len_n--] = '\0';
 	if (n == 0)
 		res[0] = '0';

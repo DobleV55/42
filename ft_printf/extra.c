@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extra.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putstr(char *s, int order)
@@ -16,15 +28,15 @@ int	ft_putstr(char *s, int order)
 	while (s[i])
 	{
 		write(1, &s[i], 1);
-		i+=(1*order);
+		i += (1 * order);
 	}
 	return (ft_strlen(s));
 }
 
 int	ft_putaddress(unsigned long num)
 {
-	static int 	num_len;
-	char		*hexchar;
+	static int		num_len;
+	char			*hexchar;
 
 	num_len = 0;
 	hexchar = "0123456789abcdef";
@@ -54,11 +66,11 @@ int	ft_puthexnbr_upper(unsigned int num)
 {
 	int			temp;
 	int			i;
-	char 		*hex_num;
+	char		*hex_num;
 
 	if (!num)
 		return (ft_putstr("0", 1));
-	hex_num = ft_calloc(1,9);
+	hex_num = ft_calloc(1, 9);
 	i = 0;
 	while (num > 0)
 	{
@@ -78,11 +90,11 @@ int	ft_puthexnbr_lower(unsigned int num)
 {
 	int			temp;
 	int			i;
-	char 		*hex_num;
+	char		*hex_num;
 
 	if (!num)
 		return (ft_putstr("0", 1));
-	hex_num = ft_calloc(1,9);
+	hex_num = ft_calloc(1, 9);
 	i = 0;
 	while (num > 0)
 	{
@@ -97,4 +109,3 @@ int	ft_puthexnbr_lower(unsigned int num)
 	free(hex_num);
 	return (i);
 }
-
