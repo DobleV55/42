@@ -6,7 +6,7 @@
 /*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:58:46 by valenvila         #+#    #+#             */
-/*   Updated: 2022/10/20 15:59:15 by valenvila        ###   ########.fr       */
+/*   Updated: 2022/10/20 16:07:46 by valenvila        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_format(va_list *ap, const char str)
 	if (str == 'c')
 		prints += ft_putchar(va_arg(*ap, int));
 	else if (str == 's')
-		prints += ft_putstr(va_arg(*ap, *char), 1);
+		prints += ft_putstr(va_arg(*ap, char *), 1);
 	else if (str == 'i' || str == 'd')
 		prints += ft_putnbr(va_arg(*ap, int));
 	else if (str == 'p')
