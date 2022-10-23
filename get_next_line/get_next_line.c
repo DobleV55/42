@@ -3,25 +3,29 @@
 #include <stdio.h> //printf
 #include <fcntl.h> //O_RDONLY
 
-// Hola buenos dias \n hola buenos dias
-
 char	*get_next_line(int fd)
 {
 	static int		left;
 	int				i;
+	int				alread;
 	char			actual_char;
 
 	i = 0;
+	alread = 0;
 	char *s = (char *) malloc(BUFFER_SIZE + left);
 	while (left)
-	{
-		
-	}
-	while (i < BUFFER_SIZE)
 	{
 		read(fd, &actual_char, 1);
 		s[i] = actual_char;
 		i++;
+		left--;
+	}
+	while (alread < BUFFER_SIZE)
+	{
+		read(fd, &actual_char, 1);
+		s[i] = actual_char;
+		i++;
+		alread++;
 		if (actual_char == '\n')
 		{
 			left = BUFFER_SIZE - i;
@@ -37,12 +41,10 @@ int	main()
 	int fd;
 	fd = open("foo.txt", O_RDONLY);
 	s = get_next_line(fd);
-	printf("%s", s);
-	printf("termine00");
+	printf("0:%s", s);
 	s = get_next_line(fd);
-	printf("%s", s);
-	printf("termine01");
+	printf("1:%s", s);
 	s = get_next_line(fd);
-	printf("%s", s);
+	printf("2:%s", s);
 	return (0);
 }
