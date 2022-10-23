@@ -7,22 +7,42 @@
 
 char	*get_next_line(int fd)
 {
-	int	i;
+	static int		left;
+	int				i;
+	char			actual_char;
 
 	i = 0;
-	char *s = (char *) malloc(BUFFER_SIZE + 1);
+	char *s = (char *) malloc(BUFFER_SIZE + left);
+	while (left)
+	{
+		
+	}
 	while (i < BUFFER_SIZE)
 	{
-		read(fd, s, 1);
+		read(fd, &actual_char, 1);
+		s[i] = actual_char;
 		i++;
+		if (actual_char == '\n')
+		{
+			left = BUFFER_SIZE - i;
+			return (s);
+		}
 	}
 	return (s);
 }
 
 int	main()
 {
+	char *s;
 	int fd;
 	fd = open("foo.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
+	s = get_next_line(fd);
+	printf("%s", s);
+	printf("termine00");
+	s = get_next_line(fd);
+	printf("%s", s);
+	printf("termine01");
+	s = get_next_line(fd);
+	printf("%s", s);
 	return (0);
 }
