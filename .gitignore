@@ -1,0 +1,4 @@
+*.o
+.idea/
+libft/
+.DS_Store
