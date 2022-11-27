@@ -2,3 +2,4 @@
 .idea/
 libft/
 .DS_Store
+*.out
