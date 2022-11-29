@@ -1,70 +1,53 @@
 #include "get_next_line.h"
 
-char	*get_before_newline_char(const char *s)
+void	map_response_and_backup(char *tmp, char **response, char **backup)
 {
 	char	*res;
-	int		i;
-
-	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-		i++;
-	if (s[i] == '\n')
-		i++;
-	res = ft_calloc(i + 1, sizeof * res);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-	{
-		res[i] = s[i];
-		i++;
-	}
-	if (s[i] == '\n')
-	{
-		res[i] = s[i];
-		i++;
-	}
-	return (res);
-}
-char	*get_after_newline_char(const char *s)
-{
-	char	*res;
+	char	*back;
 	int		i;
 	int		j;
 
+	tmp = ft_strdup(*backup);
+	ft_free_all(NULL, backup, NULL);
+	i = 0;
+	while (tmp[i] != '\0' && tmp[i] != '\n')
+		i++;
+	if (tmp[i] == '\n')
+		i++;
+	res = ft_calloc(i + 1, 1);
+	if (!res)
+		return ;
+	i = 0;
+	while (tmp[i] != '\0' && tmp[i] != '\n')
+	{
+		res[i] = tmp[i];
+		i++;
+	}
+	if (tmp[i] == '\n')
+		res[i] = '\n';
+	*response = res;
+
 	j = 0;
-	while (s && s[j])
+	while (tmp && tmp[j])
 		j++;
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
+	while (tmp[i] != '\0' && tmp[i] != '\n')
 		i++;
-	if (s[i] == '\n')
+	if (tmp[i] == '\n')
 		i++;
-	res = ft_calloc((j - i) + 1, sizeof * res);
-	if (!res)
-		return (NULL);
+	back = ft_calloc((j - i) + 1, 1);
+	if (!back)
+		return ;
 	j = 0;
-	while (s[i + j])
+	while (tmp[i + j])
 	{
-		res[j] = s[i + j];
+		back[j] = tmp[i + j];
 		j++;
 	}
-	return (res);
+	*backup = back;
+	ft_free_all(&tmp, NULL, NULL);
+	return ;
 }
-
-char	*ft_reasign_backup(char **backup, char **tmp)
-{
-	char	*response;
-
-	*tmp = ft_strdup(*backup);
-	ft_free_all(NULL, backup, NULL);
-	*backup = get_after_newline_char(*tmp);
-	response = get_before_newline_char(*tmp);
-	ft_free_all(tmp, NULL, NULL);
-	return (response);
-
-}
-
 void	ft_free_all(char **buffer, char **backup, char **response)
 {
 	if (buffer && *buffer)
@@ -102,10 +85,19 @@ void	ft_read_file(int fd, char **backup, char **tmp)
 			return ;
 		}
 		buffer[chars_read] = '\0';
+		// copio backup en tmp
 		*tmp = ft_strdup(*backup);
+		// libero backup
 		ft_free_all(NULL, backup, NULL);
+		// backup -> tmp + buffer
 		*backup = ft_strjoin(*tmp, buffer);
+		// libero tmp
 		ft_free_all(tmp, NULL, NULL);
+		// se podria hacer: buffer = buffer + backup -> libero backup -> backup = buffer -> libero buffer (o no :c)
+		// buffer = ft_strjoin(*backup, buffer);
+		// ft_free_all(NULL, backup, NULL);
+		// *backup = ft_strdup(buffer);
+		// ft_free_all(&buffer, NULL, NULL);
 		if (ft_get_new_line_char_position(*backup) != 0)
 			break ;
 	}
@@ -124,7 +116,7 @@ char	*get_next_line(int fd)
 	tmp = NULL;
 	ft_read_file(fd, &backup, &tmp);
 	if (backup != NULL && *backup != '\0')
-		response = ft_reasign_backup(&backup, &tmp);
+		map_response_and_backup(tmp, &response, &backup);
 	if (!response || *response == '\0')
 	{
 		ft_free_all(&tmp, &backup, &response);
