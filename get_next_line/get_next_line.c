@@ -8,9 +8,9 @@ char	*get_before_newline_char(const char *s)
 	i = 0;
 	while (s[i] != '\0' && s[i] != '\n')
 		i++;
-	if (s[i] != '\0' && s[i] == '\n')
+	if (s[i] == '\n')
 		i++;
-	res = ft_malloc_zero(i + 1, sizeof * res);
+	res = ft_calloc(i + 1, sizeof * res);
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -38,9 +38,9 @@ char	*get_after_newline_char(const char *s)
 	i = 0;
 	while (s[i] != '\0' && s[i] != '\n')
 		i++;
-	if (s[i] != '\0' && s[i] == '\n')
+	if (s[i] == '\n')
 		i++;
-	res = ft_malloc_zero((j - i) + 1, sizeof * res);
+	res = ft_calloc((j - i) + 1, sizeof * res);
 	if (!res)
 		return (NULL);
 	j = 0;
@@ -56,30 +56,10 @@ char	*ft_reasign_backup(char **backup, char **tmp)
 {
 	char	*response;
 
-//	printf("backup: %s\n", *backup);
-	// leave the chars before the \n in response
-//	printf("res: %s.\n", *response);
 	*tmp = ft_strdup(*backup);
 	ft_free_all(NULL, backup, NULL);
 	*backup = get_after_newline_char(*tmp);
 	response = get_before_newline_char(*tmp);
-//	while ((*tmp)[counter] != '\n' && (*tmp)[counter] != '\0')
-//		counter++;
-//
-//	if ((*tmp)[counter] != '\0')
-//		counter++;
-//	printf("------response------\n");
-//	response = ft_strodup(*tmp, 0, counter);
-//	printf("response: %s\n", *response);
-//	printf("------finish response-----\n");
-	//if (!*response)
-	//	return ;
-//	printf("------backup------\n");
-//	*backup = ft_strodup(*tmp, counter, 0);
-//	printf("backup: %s\n", *backup);
-//	printf("------finish backup-----\n");
-	//if (!*backup)
-	//	return ;
 	ft_free_all(tmp, NULL, NULL);
 	return (response);
 
