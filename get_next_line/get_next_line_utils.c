@@ -58,57 +58,87 @@ void	*ft_cpy_arr(char const *arr)
 	return (str - len_arr);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s1)
 {
-	size_t		size;
-	size_t		i;
-	char		*cp_str;
+	char	*s2;
+	int		i;
 
+	if (!s1)
+		return (ft_strdup(""));
 	i = 0;
-	while (s[i])
+	while (s1[i])
 		i++;
-	size = (i + 1);
-	cp_str = (char *)malloc(size * sizeof(char));
-	if (!cp_str)
+	s2 = ft_malloc_zero(i + 1, sizeof * s2);
+	if (!s2)
 		return (NULL);
 	i = 0;
-	while (i < size)
+	while (s1[i])
 	{
-		cp_str[i] = s[i];
+		s2[i] = s1[i];
 		i++;
 	}
-	return (cp_str);
+	return (s2);
 }
 
 char	*ft_strjoin(char	*s1, char const	*s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	char	*s;
+	int		len;
+	int		i;
 
-	if (!s1)
-		s1 = ft_strdup("");
-	if (!s1 || !s2)
+	len = 0;
+	if (!s1 && !s2)
 		return (NULL);
+	while (s1 && s1[len])
+		len++;
 	i = 0;
-	while (s1[i])
+	while (s2 && s2[i])
 		i++;
-	j = 0;
-	while (s2[j])
-		j++;
-	str = malloc(sizeof(char) * (i + j + 1));
-	if (!str)
+	s = ft_malloc_zero(len + i + 1, sizeof * s);
+	if (!s)
 		return (NULL);
-	j = 0;
-	ft_strlcpy(str, s1, i + 1);
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
+	len = -1;
+	while (s1 && s1[++len])
+		s[len] = s1[len];
+	i = -1;
+	while (s2 && s2[++i])
+		s[len + i] = s2[i];
+	return (s);
+}
+void	*ft_malloc_zero(size_t count, size_t size)
+{
+	void			*r;
+	unsigned char	*p;
+	size_t			total;
+
+	total = count * size;
+	r = malloc(total);
+	if (!r)
+		return (NULL);
+	p = (unsigned char *)r;
+	while (total != 0)
+	{
+		*p = '\0';
+		p++;
+		total--;
+	}
+	return (r);
 }
 
 
+int		contains_newline(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 int	ft_get_new_line_char_position(const char *s)
 {
 	int	i;
