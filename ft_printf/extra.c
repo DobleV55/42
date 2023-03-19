@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valenvila <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: valenvila <vvila@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
 /*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
@@ -64,48 +64,38 @@ int	ft_putunbr(unsigned int num)
 
 int	ft_puthexnbr_upper(unsigned int num)
 {
-	int			temp;
-	int			i;
-	char		*hex_num;
+	int	i;
 
+	i = 0;
 	if (!num)
 		return (ft_putstr("0", 1));
-	hex_num = ft_calloc(1, 9);
-	i = 0;
-	while (num > 0)
+	if (num >= 16)
 	{
-		temp = num % 16;
-		if (temp < 10)
-			hex_num[i++] = temp + 48;
-		else
-			hex_num[i++] = temp + 55;
-		num = num / 16;
+		i += ft_puthexnbr_upper(num / 16);
+		num = num % 16;
 	}
-	ft_putstr(hex_num, -1);
-	free(hex_num);
+	if (num < 10)
+		i += ft_putchar(num + 48);
+	else
+		i += ft_putchar(num + 55);
 	return (i);
 }
 
 int	ft_puthexnbr_lower(unsigned int num)
 {
-	int			temp;
-	int			i;
-	char		*hex_num;
+	int	i;
 
+	i = 0;
 	if (!num)
 		return (ft_putstr("0", 1));
-	hex_num = ft_calloc(1, 9);
-	i = 0;
-	while (num > 0)
+	if (num >= 16)
 	{
-		temp = num % 16;
-		if (temp < 10)
-			hex_num[i++] = temp + 48;
-		else
-			hex_num[i++] = temp + 87;
-		num = num / 16;
+		i += ft_puthexnbr_lower(num / 16);
+		num = num % 16;
 	}
-	ft_putstr(hex_num, -1);
-	free(hex_num);
+	if (num < 10)
+		i += ft_putchar(num + 48);
+	else
+		i += ft_putchar(num + 87);
 	return (i);
 }
