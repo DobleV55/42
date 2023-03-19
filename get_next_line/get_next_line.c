@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <vvila@student.42madrid.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	map_response_and_backup(char **response, char **backup)
@@ -24,7 +36,6 @@ void	map_response_and_backup(char **response, char **backup)
 	if ((*backup)[i] == '\n')
 		res[i] = '\n';
 	*response = res;
-
 	j = 0;
 	while (*backup && (*backup)[j])
 		j++;
@@ -46,6 +57,7 @@ void	map_response_and_backup(char **response, char **backup)
 	*backup = back;
 	return ;
 }
+
 void	ft_free_all(char **buffer, char **backup, char **response)
 {
 	if (buffer && *buffer)
@@ -67,7 +79,7 @@ void	ft_free_all(char **buffer, char **backup, char **response)
 
 void	ft_read_file(int fd, char **backup)
 {
-	int 		chars_read;
+	int			chars_read;
 	char		*buffer;
 	char		*tmp;
 
@@ -75,25 +87,16 @@ void	ft_read_file(int fd, char **backup)
 	buffer = (char *) malloc (BUFFER_SIZE + 1);
 	if (!buffer)
 		return ;
-	while(chars_read > 0)
+	while (chars_read > 0)
 	{
 		chars_read = read(fd, buffer, BUFFER_SIZE);
 		if (chars_read < 0)
-			return ft_free_all(&buffer, backup, NULL);
+			return (ft_free_all(&buffer, backup, NULL));
 		buffer[chars_read] = '\0';
-		// copio backup en tmp
 		tmp = ft_strdup(*backup);
-		// libero backup
 		ft_free_all(NULL, backup, NULL);
-		// backup -> tmp + buffer
 		*backup = ft_strjoin(tmp, buffer);
-		// libero tmp
 		ft_free_all(&tmp, NULL, NULL);
-		// se podria hacer: buffer = buffer + backup -> libero backup -> backup = buffer -> libero buffer (o no :c)
-		// buffer = ft_strjoin(*backup, buffer);
-		// ft_free_all(NULL, backup, NULL);
-		// *backup = ft_strdup(buffer);
-		// ft_free_all(&buffer, NULL, NULL);
 		if (ft_get_new_line_char_position(*backup) != 0)
 			break ;
 	}

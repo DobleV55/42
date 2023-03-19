@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_lline_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valenvila <vvila@student.42madrid.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/20 15:59:14 by valenvila         #+#    #+#             */
+/*   Updated: 2022/10/20 15:59:14 by valenvila        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <limits.h>
 
@@ -21,7 +33,7 @@ char	*ft_strdup(const char *s1)
 
 	len = 0;
 	if (!s1)
-		return ((char *) ft_calloc(1,1));
+		return ((char *)ft_calloc(1, 1));
 	while (*s1)
 	{
 		s1++;
@@ -40,7 +52,6 @@ char	*ft_strdup(const char *s1)
 	*str_cpy = '\0';
 	return (str_cpy - len);
 }
-
 
 char	*ft_strjoin(char	*s1, char const	*s2)
 {
@@ -91,19 +102,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return (r);
 }
 
-int		contains_newline(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 int	ft_get_new_line_char_position(const char *s)
 {
 	int	i;
