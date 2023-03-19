@@ -12,50 +12,48 @@
 
 #include "get_next_line.h"
 
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	s_len;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (start + len > s_len)
+		len = s_len - start;
+	substr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!substr)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
+	return (substr);
+}
+
 void	map_response_and_backup(char **response, char **backup)
 {
+	int		i;
 	char	*res;
 	char	*back;
-	int		i;
-	int		j;
 
 	i = 0;
-	while ((*backup)[i] != '\0' && (*backup)[i] != '\n')
+	while ((*backup)[i] && (*backup)[i] != '\n')
 		i++;
-	if ((*backup)[i] == '\n')
-		i++;
-	res = ft_calloc(i + 1, 1);
+	res = ft_substr(*backup, 0, i + ((*backup)[i] == '\n'));
 	if (!res)
 		return ;
-	i = 0;
-	while ((*backup)[i] != '\0' && (*backup)[i] != '\n')
-	{
-		res[i] = (*backup)[i];
-		i++;
-	}
-	if ((*backup)[i] == '\n')
-		res[i] = '\n';
 	*response = res;
-	j = 0;
-	while (*backup && (*backup)[j])
-		j++;
-	i = 0;
-	while ((*backup)[i] != '\0' && (*backup)[i] != '\n')
-		i++;
-	if ((*backup)[i] == '\n')
-		i++;
-	back = ft_calloc((j - i) + 1, 1);
-	if (!back)
-		return ;
-	j = 0;
-	while ((*backup)[i + j])
-	{
-		back[j] = (*backup)[i + j];
-		j++;
-	}
+	back = ft_strdup(*backup + i + ((*backup)[i] == '\n'));
 	ft_free_all(NULL, backup, NULL);
 	*backup = back;
-	return ;
 }
 
 void	ft_free_all(char **buffer, char **backup, char **response)
